@@ -54,15 +54,18 @@ Detailed description of the remaining/all modules can be found in the project re
 
 ### Screenshots:
 
-[![Log in Page of Online Tax Information System](https://www.codewithc.com/wp-content/uploads/2015/01/OTIS-log-in-page.png)](https://www.codewithc.com/wp-content/uploads/2015/01/OTIS-log-in-page.png)
+[![Log in Page of Online Tax Information System]![68747470733a2f2f7777772e636f646577697468632e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031352f30312f4f5449532d6c6f672d696e2d706167652e706e67](https://user-images.githubusercontent.com/93751501/207388789-62452c28-3820-46b8-894a-c00ea54d8d1f.png)
+
 
 Log in Page
 
-[![House Registration in Tax Management System](https://www.codewithc.com/wp-content/uploads/2015/01/OTIS-house-registration.png)](https://www.codewithc.com/wp-content/uploads/2015/01/OTIS-house-registration.png)
+[![House Registration in Tax Management System]![68747470733a2f2f7777772e636f646577697468632e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031352f30312f4f5449532d686f7573652d726567697374726174696f6e2e706e67](https://user-images.githubusercontent.com/93751501/207388827-28302306-0623-4f04-99b6-a7e81c7538b3.png)
+
 
 House Registration
 
-[![Municipality Taxes](https://www.codewithc.com/wp-content/uploads/2015/01/OTIS-municipality-taxes.png)](https://www.codewithc.com/wp-content/uploads/2015/01/OTIS-municipality-taxes.png)
+[![Municipality Taxes]![68747470733a2f2f7777772e636f646577697468632e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031352f30312f4f5449532d6d756e69636970616c6974792d74617865732e706e67](https://user-images.githubusercontent.com/93751501/207388857-b200dd1e-eed8-43f3-89a1-e86bb128b0cc.png)
+
 
 Municipality Taxes
 
