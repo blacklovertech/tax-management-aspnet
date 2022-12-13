@@ -1,10 +1,10 @@
 # Tax-Management-aspnet on Asp.Net
 
-**Online Tax Information System** is a internet-based application developed in ASP.NET platform. Based on [database](https://www.codewithc.com/database-management-system-project-c-wxwidgets/) integration approach, it uses MS [SQL Server](https://www.codewithc.com/best-way-to-connect-a-c-c-application-to-a-old-sql-server-database/) as back-end database. This project is titled “Geo Spatial Info Tech Solutions”, and is aimed at automated, web-based tax management in the municipal region of a country.
+**Online Tax Information System** is a internet-based application developed in ASP.NET platform. Based on [database](https://google.com/database-management-system-project-c-wxwidgets/) integration approach, it uses MS [SQL Server](https://google.com/best-way-to-connect-a-c-c-application-to-a-old-sql-server-database/) as back-end database. This project is titled “Geo Spatial Info Tech Solutions”, and is aimed at automated, web-based tax management in the municipal region of a country.
 
 The proposed system provides user registration with various tax-related information through which users can log in to the system and see their tax details. It provides an effective solution to collect information regarding house, water, etc. and see details of due payment.
 
-This project is complete with all necessary [source code](https://www.codewithc.com/c-projects-with-source-code/), database, documentation, project report and ppt available in the download links. The project report contains project [abstract](https://www.codewithc.com/abstract-base-class-with-metaclass-python-programming/) and detailed introduction along with [data](https://www.codewithc.com/data-visualization-java-project/) flow diagrams, collaboration diagrams, tables, activity diagrams, use case diagrams and class diagrams.
+This project is complete with all necessary [source code](https://google.com/c-projects-with-source-code/), database, documentation, project report and ppt available in the download links. The project report contains project [abstract](https://google.com/abstract-base-class-with-metaclass-python-programming/) and detailed introduction along with [data](https://google.com/data-visualization-java-project/) flow diagrams, collaboration diagrams, tables, activity diagrams, use case diagrams and class diagrams.
 
 ### Download Online Tax Information System in ASP.NET with **Source Code, Database,Project Report, Documentation and ppt**
 
