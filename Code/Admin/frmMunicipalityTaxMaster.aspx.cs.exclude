@@ -1,0 +1,141 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class Admin_frmMunicipalityTaxMaster : System.Web.UI.Page
+{
+    Cls_MunicipalityTaxMaster objmunicipalityMaster = new Cls_MunicipalityTaxMaster();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+            if (!IsPostBack)
+            {
+                ShowMunicipalityid();
+                ddltaxtypeName.Items.Insert(0, "--SelectOne--"); 
+            }
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            objmunicipalityMaster.MunicipalityId = Convert.ToInt32(ddlMunicipalityName.SelectedValue);
+            objmunicipalityMaster.TaxTypeId = Convert.ToInt32(ddltaxtypeName.Text);
+            objmunicipalityMaster.TaxConstituteddate = Convert.ToDateTime(txtConstituteddate.Text);
+            objmunicipalityMaster.TaxMinValue = Convert.ToDecimal(txtminValue.Text);
+            objmunicipalityMaster.TaxMaxValue = Convert.ToDecimal(txtMaximum.Text);
+            if (ChkStatus.Checked)
+            {
+                objmunicipalityMaster.TaxActiveState = true;
+            }
+            else
+            {
+                objmunicipalityMaster.TaxActiveState = false;
+            }
+            int i = objmunicipalityMaster.InsertMunicipalitytaxMaster();
+            if (i > 0)
+            {
+                lblError.Text = "Sucessfully Recorded Added";
+                Cleardata();
+            }
+            else
+            {
+                lblError.Text = "Recorded Not Added";
+            }
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        Cleardata();
+        lblError.Text = "";
+    }
+
+    public void ShowMunicipalityid()
+    {
+        try
+        {
+            DataSet ds = objmunicipalityMaster.ShowMunicipalityId();
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                ddlMunicipalityName.DataSource = ds.Tables[0];
+                ddlMunicipalityName.DataTextField = "MunicipalityName";
+                ddlMunicipalityName.DataValueField = "MunicipalityId";
+                ddlMunicipalityName.DataBind();
+            }
+            ddlMunicipalityName.Items.Insert(0, "--SelectOne--");
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+
+    public void Cleardata()
+    {
+        try
+        {
+            txtConstituteddate.Text = "";
+            txtMaximum.Text = "";
+            txtminValue.Text = "";
+            ChkStatus.Checked = false;
+            if (ddlMunicipalityName.SelectedIndex != 0)
+                ddlMunicipalityName.SelectedIndex = 0;
+            if (ddltaxtypeName.SelectedIndex != 0)
+                ddltaxtypeName.SelectedIndex = 0;
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+    protected void ddlMunicipalityName_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            if (ddlMunicipalityName.SelectedIndex != 0)
+            {
+                DataSet ds = objmunicipalityMaster.ShowMunicipalitySelectId(Convert.ToInt32(ddlMunicipalityName.SelectedValue));
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    ddltaxtypeName.DataSource = ds.Tables[0];
+                    ddltaxtypeName.DataTextField = "TaxName";
+                    ddltaxtypeName.DataValueField = "TaxTypeId";
+                    ddltaxtypeName.DataBind();
+                }
+                ddltaxtypeName.Items.Insert(0, "--SelectOne--");
+            }
+            else
+            {
+                ddltaxtypeName.Items.Clear();
+                ddltaxtypeName.Items.Insert(0, "--SelectOne--");
+            }
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+}

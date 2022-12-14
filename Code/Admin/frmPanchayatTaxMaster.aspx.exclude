@@ -1,0 +1,168 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMasterPage.master" AutoEventWireup="true"
+    CodeFile="frmPanchayatTaxMaster.aspx.cs" Inherits="Admin_frmPanchayatTaxMaster"
+    Title="Untitled Page" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%--<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .tabledata
+        {
+            font-family: Verdana;
+            font-weight: bold;
+            font-size: xx-small;
+            text-align: left;
+        }
+        .lbldata
+        {
+            font-weight: bold;
+            font-family: Verdana;
+            color: #FF0066;
+            font-size: x-small;
+        }
+        .head
+        {
+            color: #663300;
+        }
+        .top
+        {
+            vertical-align: top;
+        }
+        .right
+        {
+            text-align: right;
+        }
+        .style1
+        {
+            width: 67px;
+        }
+        .tddata
+        {
+            background-color: #537B7B;
+            color: Yellow;
+        }
+    </style>
+</asp:Content>--%>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <center>
+        <asp:UpdatePanel ID="updatepanel1" runat="server">
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btnAdd" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnClear" EventName="Click" />
+            </Triggers>
+            <ContentTemplate>
+            <br />
+            <br />
+                <table class="tabledata" bgcolor="#c5d8d8">
+                    <tr>
+                        <td colspan="6" class="tddata">
+                            <center>
+                                <h4>
+                                    Panchayat Tax Master
+                                </h4>
+                            </center>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                        <br />
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            Panchayat Name :
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlpanchayatName" runat="server" AutoPostBack="True" 
+                                onselectedindexchanged="ddlpanchayatName_SelectedIndexChanged">
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
+                                ControlToValidate="ddlpanchayatName" InitialValue="--SelectOne--"></asp:RequiredFieldValidator>
+                        </td>
+                        <td>
+                            Tax Type Name :
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddltaxtypeName" runat="server">
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                ControlToValidate="ddltaxtypeName" InitialValue="--SelectOne--"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Minimum Tax Value :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtminValue" runat="server" Width="163px"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtminValue"
+                                ErrorMessage="*"></asp:RequiredFieldValidator>
+                            <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtminValue"
+                                ErrorMessage="*" MaximumValue="2500000000" MinimumValue="0" Type="Currency"></asp:RangeValidator>
+                        </td>
+                        <td>
+                            Maximum Tax Value :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtMaximum" runat="server" Width="163px"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtMaximum"
+                                ErrorMessage="*"></asp:RequiredFieldValidator>
+                            <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="txtMaximum"
+                                ErrorMessage="*" MaximumValue="2500000000" MinimumValue="0" Type="Currency"></asp:RangeValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tax Constituted Date :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtConstituteddate" runat="server" Width="163px"></asp:TextBox>
+                            <cc1:CalendarExtender ID="CalendarExtender1" TargetControlID="txtConstituteddate"
+                                runat="server">
+                            </cc1:CalendarExtender>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtminValue"
+                                ErrorMessage="*"></asp:RequiredFieldValidator>
+                            <asp:RangeValidator ID="RangeValidator3" runat="server" ControlToValidate="txtminValue"
+                                ErrorMessage="*" MaximumValue="2500000000" MinimumValue="0" Type="Currency"></asp:RangeValidator>
+                        </td>
+                        <td>
+                            Tax Active State :
+                        </td>
+                        <td>
+                            <asp:CheckBox ID="ChkStatus" runat="server" />
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                        <br />
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="tddata">
+                            <center>
+                                <asp:Button ID="btnAdd" runat="server" Text="Submit" BackColor="#BED3E9" Font-Bold="True"
+                                    ForeColor="#CC0000" OnClick="btnAdd_Click" />
+                                <asp:Button ID="btnClear" runat="server" Text="Clear" BackColor="#BED3E9" Font-Bold="True"
+                                    ForeColor="#CC0000" OnClick="btnClear_Click" ValidationGroup="b1" />
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <asp:Label ID="lblError" CssClass="lbldata" runat="server"></asp:Label>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </center>
+</asp:Content>

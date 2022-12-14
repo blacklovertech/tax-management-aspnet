@@ -1,0 +1,251 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMasterPage.master" AutoEventWireup="true"
+    CodeFile="frmHouseMaster.aspx.cs" Inherits="SubAdmin_frmHouseMaster" Title="Untitled Page" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+
+
+<%--<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .tabledata
+        {
+            font-family: Verdana;
+            font-weight: bold;
+            font-size: xx-small;
+            text-align: left;
+            background-color: #BEBE7C;
+        }
+        .lbldata
+        {
+            font-weight: bold;
+            font-family: Verdana;
+            color: #FF0066;
+            font-size: xx-small;
+        }
+        .head
+        {
+            color: #663300;
+        }
+        .tddata
+        {
+            background-color: #74743A;
+            color: White;
+        }
+        .top
+        {
+            vertical-align: top;
+        }
+    </style>
+</asp:Content>--%>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <center>
+        <asp:UpdatePanel ID="updatepanel1" runat="server">
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btnAdd" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnClear" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="ddlAreaId" EventName="SelectedIndexChanged" />
+                <asp:AsyncPostBackTrigger ControlID="ddlStreetName" EventName="SelectedIndexChanged" />
+                <asp:AsyncPostBackTrigger ControlID="txtActualNo" EventName="TextChanged" />
+            </Triggers>
+            <ContentTemplate>
+                <br />
+                <br />
+                <table class="tabledata">
+                    <tr>
+                        <td colspan="6" class="tddata" bgcolor="#6D8143">
+                            <center>
+                                <h4 class="style1">
+                                    House Master</h4>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Owner Name :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtOwnerName" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*"
+                                ControlToValidate="txtOwnerName"></asp:RequiredFieldValidator>
+                        </td>
+                        <td>
+                            Tele Phone No :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txttelephoneno" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*"
+                                ControlToValidate="txttelephoneno"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="{0,5}-{6}"
+                                ControlToValidate="txttelephoneno" ValidationExpression="\d{0,5}-\d{6}" Display="Dynamic"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Actual House No :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtActualNo" runat="server" OnTextChanged="txtActualNo_TextChanged"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*"
+                                ControlToValidate="txtActualNo"></asp:RequiredFieldValidator>
+                        </td>
+                        <td>
+                            Email id :
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtemail" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*"
+                                ControlToValidate="txtemail"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtemail"
+                                Display="Dynamic" ErrorMessage="*" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Area Name :
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlAreaId" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlAreaId_SelectedIndexChanged">
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*"
+                                ControlToValidate="ddlAreaId" InitialValue="--SelectOne--"></asp:RequiredFieldValidator>
+                        </td>
+                        <td>
+                            Street Name :
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlStreetName" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlStreetName_SelectedIndexChanged">
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*"
+                                ControlToValidate="ddlStreetName" InitialValue="--SelectOne--"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Plot Name :
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlPlotName" runat="server">
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*"
+                                ControlToValidate="ddlPlotName" InitialValue="--SelectOne--"></asp:RequiredFieldValidator>
+                        </td>
+                        <td>
+                            Electricity Connection Status :
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlpowerStatus" runat="server">
+                                <asp:ListItem>--SelectOne--</asp:ListItem>
+                                <asp:ListItem>Yes</asp:ListItem>
+                                <asp:ListItem>No</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*"
+                                ControlToValidate="ddlpowerStatus" InitialValue="--SelectOne--"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Gas Connection Status :
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlGasStatus" runat="server">
+                                <asp:ListItem>--SelectOne--</asp:ListItem>
+                                <asp:ListItem>Yes</asp:ListItem>
+                                <asp:ListItem>No</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*"
+                                ControlToValidate="ddlGasStatus" InitialValue="--SelectOne--"></asp:RequiredFieldValidator>
+                        </td>
+                        <td>
+                            Water Connection Status :
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlwaterconnstatus" runat="server">
+                                <asp:ListItem>--SelectOne--</asp:ListItem>
+                                <asp:ListItem>Connected</asp:ListItem>
+                                <asp:ListItem>DisConnected</asp:ListItem>
+                                <asp:ListItem>TemporaryConnected</asp:ListItem>
+                                <asp:ListItem>NoConnection</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*"
+                                ControlToValidate="ddlwaterconnstatus" InitialValue="--SelectOne--"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            <input id="Text1" type="text" onclick="return Text1_onclick()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="tddata" bgcolor="#6E8043">
+                            <center>
+                                <asp:Button ID="btnAdd" runat="server" Text="Submit" BackColor="#999966" Font-Bold="True"
+                                    ForeColor="#CC0000" OnClick="btnAdd_Click" />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <asp:Button ID="btnClear" runat="server" Text="Clear" BackColor="#999966" Font-Bold="True"
+                                    ForeColor="#CC0000" ValidationGroup="b1" Height="26px" OnClick="btnClear_Click" />
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <asp:Label ID="lblError" CssClass="lbldata" runat="server"></asp:Label>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </center>
+</asp:Content>
+<asp:Content ID="Content3" runat="server" contentplaceholderid="head">
+    <link href="../jqueryslidemenu.css" rel="stylesheet" type="text/css" />
+
+        <script src="../CS/jquery.min.js" type="text/javascript"></script>
+
+        <script src="../CS/jqueryslidemenu.js" type="text/javascript"></script>
+
+    <style type="text/css">
+    .style1
+    {
+        color: #FFFFFF;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</asp:Content>
+

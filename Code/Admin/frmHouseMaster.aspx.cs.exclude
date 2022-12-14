@@ -1,0 +1,200 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class SubAdmin_frmHouseMaster : System.Web.UI.Page
+{
+    Cls_HousesMaster objhousemaster = new Cls_HousesMaster();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+            if (!IsPostBack)
+            {
+                ShowAreaId();
+                ddlStreetName.Items.Insert(0, "--SelectOne--");
+                ddlPlotName.Items.Insert(0, "--SelectOne--");
+            }
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            objhousemaster.OwnerName = txtOwnerName.Text;
+            objhousemaster.TelephonNo = txttelephoneno.Text;
+            objhousemaster.Email = txtemail.Text;
+            objhousemaster.ActualHouseNo = txtActualNo.Text;
+            objhousemaster.AreaId = Convert.ToInt32(ddlAreaId.SelectedValue);
+            objhousemaster.StreetId = Convert.ToInt32(ddlStreetName.SelectedValue);
+            objhousemaster.PlotId = Convert.ToInt32(ddlPlotName.SelectedValue);
+            if (ddlpowerStatus.Text == "Yes")
+                objhousemaster.ElectricityConnstatus = true;
+            else
+                objhousemaster.ElectricityConnstatus = false;
+            if (ddlGasStatus.Text == "Yes")
+                objhousemaster.GasConnStatus = true;
+            else
+                objhousemaster.GasConnStatus = false;
+            objhousemaster.WaterConnStatus = ddlwaterconnstatus.Text;
+            objhousemaster.C_M_P_Id = Convert.ToInt32(Session["EmployeeId"]);
+            int i = objhousemaster.InsertHouseMaster();
+            if (i > 0)
+            {
+                lblError.Text = "Sucess fully Inserted";
+                Cleardata();
+            }
+            else
+            {
+                lblError.Text = "Sucess fully Not Inserted";
+            }
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        Cleardata();
+        lblError.Text = "";
+    }
+    protected void txtActualNo_TextChanged(object sender, EventArgs e)
+    {
+       int i=Convert.ToInt32(txtActualNo.Text.Length );
+       if (i > 4)
+       {
+           objhousemaster.ActualHouseNo = txtActualNo.Text;
+           string s= objhousemaster.CheckActualHouseno();
+
+       }
+       else
+       { 
+       
+       }
+    }
+    protected void ddlAreaId_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            Cls_PLotMaster objplotmaster = new Cls_PLotMaster();
+            if (ddlAreaId.SelectedIndex != 0)
+            {
+                DataSet ds = objplotmaster.ShowAreaIdSelectShowStreetid(Convert.ToInt32(ddlAreaId.SelectedValue));
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    ddlStreetName.DataSource = ds.Tables[0];
+                    ddlStreetName.DataTextField = "StreetName";
+                    ddlStreetName.DataValueField = "StreetId";
+                    ddlStreetName.DataBind();
+                    ddlStreetName.Items.Insert(0, "--SelectOne--");
+                }
+                else
+                {
+                    ddlStreetName.Items.Clear();
+                    ddlStreetName.Items.Insert(0, "--SelectOne--");
+                }
+            }
+            else
+            {
+                ddlStreetName.Items.Clear();
+                ddlStreetName.Items.Insert(0, "--SelectOne--");
+            }
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+    public void ShowAreaId()
+    {
+        try
+        {
+            Cls_PLotMaster objplotmaster = new Cls_PLotMaster();
+            DataSet ds = objplotmaster.ShowAreaid(Convert.ToInt32(Session["EmployeeId"]));
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                ddlAreaId.DataSource = ds.Tables[0];
+                ddlAreaId.DataTextField = "AreaName";
+                ddlAreaId.DataValueField = "AreaId";
+                ddlAreaId.DataBind();
+            }
+            ddlAreaId.Items.Insert(0, "--SelectOne--");
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+    protected void ddlStreetName_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            Cls_PLotMaster objplotmaster = new Cls_PLotMaster();
+            if (ddlStreetName.SelectedIndex != 0)
+            {
+                DataSet ds = objplotmaster.SelctStreetIdShowPlotid(Convert.ToInt32(ddlStreetName.SelectedValue));
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    ddlPlotName.DataSource = ds.Tables[0];
+                    ddlPlotName.DataTextField = "plotownername";
+                    ddlPlotName.DataValueField = "plotid";
+                    ddlPlotName.DataBind();
+                    ddlPlotName.Items.Insert(0, "--SelectOne--");
+                }
+                else
+                {
+                    ddlPlotName.Items.Clear();
+                    ddlPlotName.Items.Insert(0, "--SelectOne--");
+                }
+            }
+            else
+            {
+                ddlPlotName.Items.Clear();
+                ddlPlotName.Items.Insert(0, "--SelectOne--");
+            }
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+    public void Cleardata()
+    {
+        txtActualNo.Text = "";
+        txtemail.Text = "";
+        txtOwnerName.Text = "";
+        txttelephoneno.Text = "";
+        if (ddlAreaId.SelectedIndex != 0)
+            ddlAreaId.SelectedIndex = 0;
+        if (ddlGasStatus .SelectedIndex != 0)
+            ddlGasStatus.SelectedIndex = 0;
+        if (ddlPlotName .SelectedIndex != 0)
+            ddlPlotName.SelectedIndex = 0;
+        if (ddlpowerStatus .SelectedIndex != 0)
+            ddlpowerStatus.SelectedIndex = 0;
+        if (ddlStreetName .SelectedIndex != 0)
+            ddlStreetName.SelectedIndex = 0;
+        if (ddlwaterconnstatus .SelectedIndex != 0)
+            ddlwaterconnstatus.SelectedIndex = 0;
+    
+    }
+}

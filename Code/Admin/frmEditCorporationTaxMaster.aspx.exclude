@@ -1,0 +1,42 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMasterPage.master" AutoEventWireup="true"
+    CodeFile="frmEditCorporationTaxMaster.aspx.cs" Inherits="Admin_frmEditCorporationTaxMaster"
+    Title="Untitled Page" %>
+
+<%--<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .tabledata
+        {
+            font-family: Verdana;
+            font-weight: bold;
+            font-size: xx-small;
+            text-align: left;
+        }
+        .lbldata
+        {
+            font-weight: bold;
+            font-family: Verdana;
+            color: #FF0066;
+        }
+        .head
+        {
+            color: #663300;
+        }
+        .top
+        {
+            vertical-align: top;
+        }
+        .right
+        {
+            text-align: right;
+        }
+        .tbdata
+        {
+            background-color: #008200;
+            color: Yellow;
+        }
+    </style>
+</asp:Content>--%>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    
+    
+</asp:Content>

@@ -1,0 +1,137 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class Admin_frmPanchayatTaxMaster : System.Web.UI.Page
+{
+    Cls_PanchayattaxMaster objPanchayattaxmaster = new Cls_PanchayattaxMaster();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+            if (!IsPostBack)
+            {
+                ShowPanchayatId();
+                ddltaxtypeName.Items.Insert(0, "--SelectOne--"); 
+            }
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            objPanchayattaxmaster.PanchayatId = Convert.ToInt32(ddlpanchayatName.SelectedValue);
+            objPanchayattaxmaster.TaxTypeId = Convert.ToInt32(ddltaxtypeName.SelectedValue);
+            objPanchayattaxmaster.TaxConstitutedDate = Convert.ToDateTime(txtConstituteddate.Text);
+            objPanchayattaxmaster.TaxMinValue = Convert.ToDecimal(txtminValue.Text);
+            objPanchayattaxmaster.TaxMaxvalue = Convert.ToDecimal(txtMaximum.Text);
+            if (ChkStatus.Checked)
+            {
+                objPanchayattaxmaster.TaxActiveStatus = true;
+            }
+            else
+            {
+                objPanchayattaxmaster.TaxActiveStatus = false;
+            }
+            int i = objPanchayattaxmaster.InsertGovernMentMaster();
+            if (i > 0)
+            {
+                lblError.Text = "Sucessfully Data Added";
+                Cleardata();
+            }
+            else {
+                lblError.Text = "Not Added";
+            }
+        }
+        catch (Exception ex)
+        {
+            lblError.Text = ex.Message;
+        }
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        Cleardata();
+        lblError.Text = "";
+    }
+    public void Cleardata()
+    {
+        try
+        {
+            txtConstituteddate.Text = "";
+            txtMaximum.Text = "";
+            txtminValue.Text = "";
+            ChkStatus.Checked = false;
+            if (ddlpanchayatName.SelectedIndex != 0)
+                ddlpanchayatName.SelectedIndex = 0;
+            if (ddltaxtypeName.SelectedIndex != 0)
+                ddltaxtypeName.SelectedIndex = 0;
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+    public void ShowPanchayatId()
+    {
+        try
+        {
+            DataSet ds = objPanchayattaxmaster.ShowGramPanchayatId();
+            if (ds.Tables[0].Rows.Count != 0)
+            {
+                ddlpanchayatName.DataSource = ds.Tables[0];
+                ddlpanchayatName.DataTextField = "PanchayatName";
+                ddlpanchayatName.DataValueField = "GramPanchayatId";
+                ddlpanchayatName.DataBind();
+            }
+            ddlpanchayatName.Items.Insert(0, "--SelectOne--");
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+ 
+    protected void ddlpanchayatName_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            if (ddlpanchayatName.SelectedIndex != 0)
+            {
+                DataSet ds = objPanchayattaxmaster.ShowGramPanchayatIdselect(Convert.ToInt32(ddlpanchayatName.SelectedValue));
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    ddltaxtypeName.DataSource = ds.Tables[0];
+                    ddltaxtypeName.DataTextField = "TaxName";
+                    ddltaxtypeName.DataValueField = "TaxTypeId";
+                    ddltaxtypeName.DataBind();
+                }
+                ddltaxtypeName.Items.Insert(0, "--SelectOne--");
+            }
+            else
+            {
+                ddltaxtypeName.Items.Clear();
+                ddltaxtypeName.Items.Insert(0, "--SelectOne--");
+            }
+        }
+        catch (Exception ex)
+        {
+            lblError.Text = ex.Message;
+        }
+    }
+}

@@ -1,0 +1,64 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class Admin_frmEditMunicipalityTaxMaster : System.Web.UI.Page
+{
+    Cls_MunicipalityTaxMaster objmunicipalitytaxmaster = new Cls_MunicipalityTaxMaster();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+            if (!IsPostBack)
+            {
+                ShowBind();
+               
+            }
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+    }
+    protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        GridView1.EditIndex = e.NewEditIndex;
+        ShowBind();
+    }
+    protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+
+    }
+    protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        GridView1.EditIndex = -1;
+        ShowBind();
+    }
+    public void ShowBind()
+    {
+        try
+        {
+             DataSet ds = objmunicipalitytaxmaster.ShowMunicipalityAlldetails();
+                if (ds.Tables[0].Rows.Count != 0)
+                {
+                    GridView1.DataSource = ds.Tables[0];
+                    GridView1.DataBind();
+                }
+        }
+        catch (Exception ex)
+        {
+
+            lblError.Text = ex.Message;
+        }
+    }
+}

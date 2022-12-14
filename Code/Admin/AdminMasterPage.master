@@ -1,0 +1,119 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMasterPage.master.cs"
+    Inherits="Admin_AdminMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Untitled Page</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        <link href="../jqueryslidemenu.css" rel="stylesheet" type="text/css" />
+
+        <script src="../CS/jquery.min.js" type="text/javascript"></script>
+
+        <script src="../CS/jqueryslidemenu.js" type="text/javascript"></script>
+
+    </asp:ContentPlaceHolder>
+</head>
+<body topmargin="0">
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <table class="table" bgcolor="#CCDDB3" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <img src="../Images/header.jpg" alt="" width="100%" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="myslidemenu" class="jqueryslidemenu">
+                    <ul>
+                        <li><a href="Default.aspx">Home</a></li>
+                        <li><a href="#">Building Details</a>
+                            <ul>
+                                <li><a href="frmCategoryusageMaster.aspx">Category Details</a></li>
+                                <li><a href="frmBuildingApprovalMaster.aspx">Building Approval</a></li>
+                                <li><a href="frmBuildingfloorMaster.aspx">Building Floor Details</a></li>
+                                <li><a href="frmBuildingApprovalCategoryUsagaMaster.aspx">Building Approval Categoryes</a></li>
+                                <li><a href="frmBuildingPropertytaxMaster.aspx">Building Property Taxes</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Area & Street Details</a>
+                            <ul>
+                                <li><a href="frmAreaTypeMaster.aspx">Add & Edit Area Types</a>
+                                    <ul>
+                                        <li><a href="frmAreaMaster.aspx">Add Area Master</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="frmStreetTypeMaster.aspx">Add & Edit Street Types</a>
+                                    <ul>
+                                        <li><a href="frmStreetMaster.aspx">Add Street Master</a></li>
+                                        <li><a href="frmplotMaster.aspx">Add Plot Master</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="frmHouseTypeMaster.aspx">Add & House Types</a>
+                                    <ul>
+                                        <li><a href="frmHouseMaster.aspx">Add House Details</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="frmLocalityMaster.aspx">Locality Master</a> </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Municipality House Details</a>
+                            <ul>
+                            <l1> <a href="frmRevenueCircleMaster.aspx">Revenue Circle</a></l1>
+                            <l1> <a href="frmRevenueBlockMaster.aspx">Revenue Block Details</a></l1>
+                                <l1> <a href="frmMunicipalitytaxmaster.aspx">Municipality Tax</a></l1>
+                                <li><a href="frmMunicipalitytaxMasterDetails.aspx">Municipality Tax Details</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Electrical Details</a>
+                            <ul>
+                                <li><a href="frmElectricalConnectionCategoryMaster.aspx">Electrical Connection Categorys</a></li>
+                                <li><a href="frmShowElectricalConnectionCategoryDetails.aspx"> Show Electrical Connection Categorys</a></li>
+                                 <li><a href="frmElectricalServiceMaster.aspx">Electrical Service Details</a></li>
+                                  <li><a href="frmElectricalEquipmentMaster.aspx">Electrical Equipment Details </a></li>
+                                   <li><a href="frmShowElectricalEquipmentMaster.aspx"> Show Electrical Equipment Details</a></li>
+                                   <li><a href="frmElectricalServiceequipMents.aspx">Electrical Service Equipments</a></li>
+                                    <li><a href="frmElectricalMeterReadingMaster.aspx">Electrical Meter Readings</a></li>
+                               
+                            </ul>
+                        </li>
+                        <li><a href="#">Reports</a>
+                            <ul>
+                                <li><a href="frmHouseDetailsReports.aspx">House Reports</a></li>
+                                <li><a href="frmBuildingApprovalReports.aspx">Building Property Taxes</a></li>
+                                 <li><a href="frmMunicipalityTaxDetailsReports.aspx">Municipality Taxes</a></li>                                  
+                            </ul>
+                        </li>
+                        <li><a href="../frmSignOut.aspx">Sign Out</a></li>
+                    </ul>
+                    <br style="clear: left" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: small; height: 400px" valign="top" bgcolor="#CCDDB3">
+                <table width="100%">
+                    <tr>
+                        <td style="width: 5px">
+                        </td>
+                        <td>
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </td>
+                        <td style="width: 5px">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="../Images/footer.jpg" alt="" style="width: 100%" />
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>
